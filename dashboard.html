@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background-color: white;
+            color:black;
+            padding: 20px;
+        }
+
+        .dark{
+            background-color: #121212;
+            color: white;
+        }
+
+        .card{
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid gray;
+            display: inline-block;
+            width: 200px;
+        }
+
+        button{
+            padding: 8px 15px;
+            background: green;
+            color:white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="toggleDark()">Dark Mode</button>
+    <h2>Welcome{{name}}</h2>
+    
+    <div class="card">
+        <h3>Attendance</h3>
+        <p>{{attendance}}%</p>
+    </div>
+
+    <div class="card">
+        <h3>Fees</h3>
+        <p>{{fees}}</p>
+    </div>
+
+    <div class="card">
+        <h3>Average Marks</h3>
+        <p>{{marks}}</p>
+    </div>
+
+    <h3>Notifactions</h3>
+    <ul>
+        {% if attendance<75 %}
+        <li>Low Atendance</li>
+        {% endif %}
+
+        {% if fees>0 %}
+        <li>Pending Fees</li>
+        {% endif %}
+    </ul>
+
+    <script>
+        function toggleDark(){
+            document.body.classList.toggle("dark");
+            if(document.body.classList.contains("dark")){
+                localStorage.setItem("theme","dark");
+            }
+            else{
+                localStorage.setItem("theme","light");
+            }
+        }
+
+        window.onload=function(){
+            if(localStorage.getItem("theme")==="dark"){
+                document.body.classList.add("dark");
+            }
+        }
+    </script>
+</body>
+</html>
